@@ -22,6 +22,23 @@ app.use(cookie());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+let isConnected = false;
+connectDb()
+  .then(() => {
+    console.log("DB Connected!");
+    isConnected = true;
+  })
+  .catch((err) => {
+    console.log("DB Connection Failed!", err);
+  });
+
+app.use((req, res, next) => {
+  if (!isConnected) {
+    connectDb();
+  }
+  next();
+});
+
 // Auth Route
 app.use("/api", authRoute);
 // Posts Route
@@ -47,9 +64,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-connectDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-});
+export default app;

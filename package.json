@@ -7,7 +7,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "type": "module"
+    "type": "module",
+    "start" : "node app.js",
+    "versel-start" : "node app.js",
+    "dev" : "nodemon app.js"
   },
   "keywords": [],
   "author": "",

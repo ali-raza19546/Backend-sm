@@ -1,5 +1,7 @@
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+import cloud from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
+const cloudinary = cloud.v2;
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -14,11 +16,7 @@ const storage = new CloudinaryStorage({
     folder: "SocialMediaUploads",
 
     allowed_formats: ["jpg", "png", "jpeg"],
-
-    public_id: (req, file) => {
-      return Date.now() + "-" + file.originalname;
-    },
   },
 });
 
-module.exports = { cloudinary, storage };
+export { cloudinary, storage };

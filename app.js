@@ -50,7 +50,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 connectDb().then(() => {
   app.listen(PORT, () => {
-    console.log("mongoose connected");
-    console.log(`server lisning at PORT ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
   });
 });

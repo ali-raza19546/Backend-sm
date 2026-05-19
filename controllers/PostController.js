@@ -20,15 +20,13 @@ const addPost = WrapAsync(async (req, res) => {
   if (!title || !content || !tags) {
     throw new ExpressErr(400, "please Fill all fileds!");
   }
-  if (!req.file) {
-    throw new ExpressErr(400, "Image field are required!");
-  }
+
   let payLoad = {
     title,
     content,
     tags,
     user: req.user.id,
-    image: req.file.filename,
+    image: req.file.path,
   };
 
   let newPost = await PostModel.create(payLoad);

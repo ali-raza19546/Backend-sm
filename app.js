@@ -13,7 +13,7 @@ import { ExpressErr } from "./utils/ExpressErr.js";
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://vercel-frontend-beta-three.vercel.app",
     credentials: true,
   }),
 );

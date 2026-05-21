@@ -16,7 +16,7 @@ const signUpController = WrapAsync(async (req, res) => {
   }
 
   let pfImage = !req.file
-    ? "https://www.gstatic.com/images/branding/product/1/avatar_circle_blue_512dp.png"
+    ? "https://tse1.mm.bing.net/th/id/OIP.zSjnJGFe_TxQyoSX48_Z6wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
     : req.file.path;
   let salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);

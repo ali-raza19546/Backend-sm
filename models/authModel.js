@@ -18,7 +18,7 @@ const userSchema = new Schema(
     profileImg: {
       type: String,
       default:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        "https://th.bing.com/th/id/OIP.zSjnJGFe_TxQyoSX48_Z6wHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
     },
     password: String,
   },

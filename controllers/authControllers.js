@@ -4,9 +4,15 @@ import { User } from "../models/authModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendEmail from "../utils/SendEmail.js";
+import { cloudinary } from "../Cloudinary.js";
 
 const signUpController = WrapAsync(async (req, res) => {
-  let { username, email, password } = req.body;
+  let { username, email, password, pfImage } = req.body;
+  let imgUrl = "";
+  if (pfImage) {
+    const uploadResponse = await cloudinary.uploader.upload(pfImage);
+    imgUrl = uploadResponse.secure_url;
+  }
 
   const existingUser = await User.findOne({ email });
   if (!username || !email || !password) {
@@ -15,15 +21,13 @@ const signUpController = WrapAsync(async (req, res) => {
     throw new ExpressErr(409, "User already exist!");
   }
 
-  let pfImage = req.file ? req.file.path : null;
-
   let salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
   const payLoad = {
     username,
     email,
     password: hashPassword,
-    profileImg: pfImage,
+    profileImg: imgUrl || undefined,
   };
 
   // Post ki id user ke pas/ user ki id post ke pas

@@ -9,6 +9,13 @@ import { cloudinary } from "../Cloudinary.js";
 const signUpController = WrapAsync(async (req, res) => {
   let { username, email, password } = req.body;
 
+  const existingUser = await User.findOne({ email });
+  if (!username || !email || !password) {
+    throw new ExpressErr(400, "All fields are required!");
+  } else if (existingUser) {
+    throw new ExpressErr(409, "User already exist!");
+  }
+
   if (!req.file) {
     throw new ExpressErr(400, "Profile image is required");
   }
@@ -17,13 +24,6 @@ const signUpController = WrapAsync(async (req, res) => {
   const result = await cloudinary.uploader.upload(req.file.path, {
     folder: "profileImages",
   });
-
-  const existingUser = await User.findOne({ email });
-  if (!username || !email || !password) {
-    throw new ExpressErr(400, "All fields are required!");
-  } else if (existingUser) {
-    throw new ExpressErr(409, "User already exist!");
-  }
 
   let salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);

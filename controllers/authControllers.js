@@ -30,11 +30,11 @@ const signUpController = WrapAsync(async (req, res) => {
   // Post ki id user ke pas/ user ki id post ke pas
   const newUser = await User.create(payLoad);
 
-  // await sendEmail({
-  //   to: email,
-  //   text: "Thank's for signUp",
-  //   subject: `Hi ${username} Welcome🎉to our website`,
-  // });
+  await sendEmail({
+    to: email,
+    text: "Thank's for signUp",
+    subject: `Hi ${username} Welcome🎉to our website`,
+  });
 
   res.status(200).json({
     message: "User created successfully",

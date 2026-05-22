@@ -19,6 +19,7 @@ const userSchema = new Schema(
       type: String,
       default:
         "https://tse1.mm.bing.net/th/id/OIP.zSjnJGFe_TxQyoSX48_Z6wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+      required: true,
     },
     password: String,
   },

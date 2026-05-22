@@ -27,7 +27,7 @@ const signUpController = WrapAsync(async (req, res) => {
     username,
     email,
     password: hashPassword,
-    profileImg: imgUrl || undefined,
+    profileImg: imgUrl,
   };
 
   // Post ki id user ke pas/ user ki id post ke pas
